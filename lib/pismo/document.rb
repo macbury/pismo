@@ -48,6 +48,7 @@ module Pismo
       # Normalize stupid entities
       # TODO: Optimize this so we don't need all these sequential gsubs
       html.encode!("UTF-8", undef: :replace, replace: "??")
+      html = html.chars.select{|i| i.valid_encoding?}.join
       html.gsub!("&#8194;", " ")
       html.gsub!("&#8195;", " ")
       html.gsub!("&#8201;", " ")
