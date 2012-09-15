@@ -47,7 +47,7 @@ module Pismo
     def self.clean_html(html)
       # Normalize stupid entities
       # TODO: Optimize this so we don't need all these sequential gsubs
-      html.encode!("UTF-8")
+      html.encode!("UTF-8", undef: :replace, replace: "??")
       html.gsub!("&#8194;", " ")
       html.gsub!("&#8195;", " ")
       html.gsub!("&#8201;", " ")
