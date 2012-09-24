@@ -30,7 +30,6 @@ module Pismo
       @html = if handle =~ /\Ahttp/i
                 open(handle).read
               elsif handle.is_a?(StringIO) || handle.is_a?(IO) || handle.is_a?(Tempfile)
-                @encoding = handle.charset if handle.respond_to?(:charset)
                 handle.read
               else
                 handle
@@ -38,7 +37,7 @@ module Pismo
               
       @html = self.class.clean_html(@html)
       
-      @doc = Nokogiri::HTML(@html, nil, @encoding)
+      @doc = Nokogiri::HTML(@html, nil, @options[:charset])
     end
     
     def match(args = [], all = false)
